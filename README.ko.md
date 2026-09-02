@@ -125,6 +125,31 @@ NaverCommerce::post('/v1/some/new-endpoint', ['body' => 'x'], ['query' => 'y']);
 NaverCommerce::request('PUT', '/v1/...', ['json' => [...], 'query' => [...]]); // Illuminate Response 반환
 ```
 
+### Artisan 커맨드
+
+```bash
+php artisan naver-commerce:ping                     # 판매자 계정·채널을 조회해 자격증명을 확인
+php artisan naver-commerce:token                    # 토큰 발급(또는 캐시 조회), 마스킹해서 출력
+php artisan naver-commerce:token --show --fresh     # 캐시 삭제 후 재발급, 전체 토큰 출력
+php artisan naver-commerce:token:forget             # 캐시된 토큰 삭제
+
+# 임의 엔드포인트 호출. GET 이외 메서드는 --force 가 없으면 확인 프롬프트를 띄움
+php artisan naver-commerce:request GET /v1/seller/channels
+php artisan naver-commerce:request GET /v1/pay-order/seller/product-orders \
+    --query=from=2026-09-01T00:00:00.000+09:00 --query=productOrderStatuses=PAYED --query=productOrderStatuses=DELIVERING
+php artisan naver-commerce:request POST /v1/products/search --json='{"page":1,"size":5}' --force
+php artisan naver-commerce:request POST /v1/pay-order/seller/product-orders/query --json=@body.json --force
+
+# 변경 상품 주문 조회(폴링용). 24시간을 넘는 범위는 자동으로 나눠서 호출
+php artisan naver-commerce:orders:changed --since=6h
+php artisan naver-commerce:orders:changed --since=2026-09-01 --until="2026-09-02 12:00" --type=PAYED --all --json
+
+# 카테고리 트리 덤프(리프 약 5,000개) — 로컬 캐시용
+php artisan naver-commerce:categories:export storage/app/naver-categories.json --last
+```
+
+모든 커맨드는 `--seller=<accountId>` 옵션으로 SELLER 토큰을 사용할 수 있습니다. 오프셋 없는 일시는 KST로 해석합니다. `orders:changed`는 결과가 잘린 경우(`--all` 없이 남은 행이 있거나 요청 상한 도달) 종료 코드 1을 반환하며, `--json` 모드에서는 경고를 stderr로 출력해 stdout이 유효한 JSON으로 유지됩니다.
+
 ## 리소스 목록
 
 | 팩토리 | 대상 API |

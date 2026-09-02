@@ -49,8 +49,10 @@ Do not invent parameter names. If a spec page is unavailable, say so rather than
 | KST date helpers | `src/Support/DateFormatter.php` |
 | Exception hierarchy | `src/Exceptions/` |
 | Endpoint methods | `src/Resources/*.php` |
+| Artisan commands (`naver-commerce:token`, `:token:forget`, `:ping`, `:request`, `:orders:changed`, `:categories:export`) | `src/Console/` |
 | Config defaults | `config/naver-commerce.php` |
 | Test bootstrap, `fakeApi()`, `assertApiSent()` | `tests/TestCase.php` |
+| Command tests (assert on `Artisan::output()`) | `tests/Feature/Console/` |
 | Live tests (skip without `.env`) | `tests/Integration/` |
 
 ## Known gotchas
@@ -59,4 +61,6 @@ Do not invent parameter names. If a spec page is unavailable, say so rather than
 - bcrypt normalizes the last salt character (`…uv` → `…uu`), so compare only the first 21 chars of the salt in signature tests.
 - The token endpoint takes `application/x-www-form-urlencoded`, not JSON. Form-decoded values are strings in `Http::fake()` assertions (`timestamp` is numeric string).
 - Testbench does not load the package-root `.env`; `tests/Integration/IntegrationTestCase.php` reads it explicitly with Dotenv.
+- `expectsOutputToContain()` matches at most one substring per written line (Mockery picks the first matching expectation). Command tests assert on `Artisan::output()` instead.
+- `GET /v1/pay-order/seller/product-orders/last-changed-statuses` rejects windows longer than 24 h with `400 104140` (verified live). `orders:changed` splits longer ranges into 24 h chunks.
 - API date-times are KST (`+09:00`) with milliseconds: `Y-m-d\TH:i:s.vP`. Date-only params (`yyyy-MM-dd`) are passed as strings by callers.

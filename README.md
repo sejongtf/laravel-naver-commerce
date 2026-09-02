@@ -125,6 +125,31 @@ NaverCommerce::post('/v1/some/new-endpoint', ['body' => 'x'], ['query' => 'y']);
 NaverCommerce::request('PUT', '/v1/...', ['json' => [...], 'query' => [...]]); // returns Illuminate Response
 ```
 
+### Artisan commands
+
+```bash
+php artisan naver-commerce:ping                     # fetch seller account + channels to verify credentials
+php artisan naver-commerce:token                    # issue (or read cached) token, printed masked
+php artisan naver-commerce:token --show --fresh     # discard cache, reissue, print the full token
+php artisan naver-commerce:token:forget             # drop the cached token
+
+# Call any endpoint; non-GET methods ask for confirmation unless --force is given
+php artisan naver-commerce:request GET /v1/seller/channels
+php artisan naver-commerce:request GET /v1/pay-order/seller/product-orders \
+    --query=from=2026-09-01T00:00:00.000+09:00 --query=productOrderStatuses=PAYED --query=productOrderStatuses=DELIVERING
+php artisan naver-commerce:request POST /v1/products/search --json='{"page":1,"size":5}' --force
+php artisan naver-commerce:request POST /v1/pay-order/seller/product-orders/query --json=@body.json --force
+
+# Changed product orders (polling primitive); windows over 24 h are split automatically
+php artisan naver-commerce:orders:changed --since=6h
+php artisan naver-commerce:orders:changed --since=2026-09-01 --until="2026-09-02 12:00" --type=PAYED --all --json
+
+# Dump the category tree (about 5,000 leaf categories) for local caching
+php artisan naver-commerce:categories:export storage/app/naver-categories.json --last
+```
+
+Every command accepts `--seller=<accountId>` to operate with a SELLER token. Date-times without an offset are interpreted as KST. `orders:changed` exits with code 1 when the result is truncated (more rows left without `--all`, or the request cap reached); in `--json` mode the warning goes to stderr so stdout stays valid JSON.
+
 ## Resources
 
 | Factory | API area |

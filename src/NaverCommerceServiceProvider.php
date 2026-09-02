@@ -7,6 +7,12 @@ use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Http\Client\Factory as HttpFactory;
 use Illuminate\Support\ServiceProvider;
 use Sejongtf\LaravelNaverCommerce\Auth\TokenManager;
+use Sejongtf\LaravelNaverCommerce\Console\CategoriesExportCommand;
+use Sejongtf\LaravelNaverCommerce\Console\OrdersChangedCommand;
+use Sejongtf\LaravelNaverCommerce\Console\PingCommand;
+use Sejongtf\LaravelNaverCommerce\Console\RequestCommand;
+use Sejongtf\LaravelNaverCommerce\Console\TokenCommand;
+use Sejongtf\LaravelNaverCommerce\Console\TokenForgetCommand;
 use Sejongtf\LaravelNaverCommerce\Http\Client;
 
 class NaverCommerceServiceProvider extends ServiceProvider
@@ -44,6 +50,15 @@ class NaverCommerceServiceProvider extends ServiceProvider
             $this->publishes([
                 __DIR__.'/../config/naver-commerce.php' => $this->app->configPath('naver-commerce.php'),
             ], 'naver-commerce-config');
+
+            $this->commands([
+                TokenCommand::class,
+                TokenForgetCommand::class,
+                PingCommand::class,
+                RequestCommand::class,
+                OrdersChangedCommand::class,
+                CategoriesExportCommand::class,
+            ]);
         }
     }
 }

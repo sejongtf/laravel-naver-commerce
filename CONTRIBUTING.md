@@ -25,6 +25,7 @@ src/
   Auth/TokenManager.php      Token issuance + cache (per type/accountId)
   Http/Client.php            Auth header, GW.AUTHN retry, 5xx retry, error → exception
   Http/QueryString.php       Spring-style query builder, body normalization
+  Console/                   Artisan commands (token, token:forget, ping, request, orders:changed, categories:export)
   Support/DateFormatter.php  KST ISO 8601 helpers
   Exceptions/                NaverCommerceException, AuthenticationException, RateLimitException, ApiException
   Resources/                 One class per API domain, extends Resource
