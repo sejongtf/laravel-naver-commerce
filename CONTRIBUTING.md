@@ -89,6 +89,12 @@ These are the conventions to keep when adding or changing code.
 - Do not add `Co-Authored-By` trailers.
 - Keep PRs focused. Include the test output or a note on what was verified, and mention if integration tests were run.
 
+## Releases
+
+- Add every user-facing change under `[Unreleased]` in `CHANGELOG.md` in the same PR.
+- Tags are plain version numbers without a `v` prefix (`0.1.0`, `0.2.0`). When releasing, move the
+  `[Unreleased]` entries under a new version heading with the date and update the compare links.
+
 ## Documentation
 
 - Documentation is written in English by default. `README.md` is the canonical English README; `README.ko.md` is the Korean translation and must be kept in sync when the English version changes.

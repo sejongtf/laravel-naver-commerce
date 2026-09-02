@@ -40,7 +40,8 @@ Do not invent parameter names. If a spec page is unavailable, say so rather than
 8. **Docs in English by default.** `README.md` (EN) and `README.ko.md` (KO) must be updated together. Code comments in new code are English.
 9. **Commits**: Conventional Commits (`feat:`, `fix:`, `docs:`, …). Do not add `Co-Authored-By` trailers. Do not commit unless asked.
 10. Do not add runtime dependencies or change the token cache key format without explicit approval.
-11. **Pint and PHPStan must pass.** Fix PHPStan findings at the source; do not add `@phpstan-ignore` comments or baseline entries. The only ignored identifier is `missingType.iterableValue` (plain `array` return types are intentional).
+11. **Changelog**: user-facing changes get an entry under `[Unreleased]` in `CHANGELOG.md`. Release tags have no `v` prefix (`0.1.0`).
+12. **Pint and PHPStan must pass.** Fix PHPStan findings at the source; do not add `@phpstan-ignore` comments or baseline entries. The only ignored identifier is `missingType.iterableValue` (plain `array` return types are intentional).
 
 ## Where things are
 
