@@ -4,7 +4,7 @@ Instructions for AI coding agents working in this repository. Human-oriented gui
 
 ## What this is
 
-`sejongtf/laravel-naver-commerce` is a Laravel 13 package wrapping the Naver Commerce API (`https://api.commerce.naver.com/external`). PHP 8.3+, Pest 5, Orchestra Testbench 11. Entry point is `Sejongtf\LaravelNaverCommerce\NaverCommerce` (facade `NaverCommerce`), which hands out resource classes (`orders()`, `products()`, …) that return decoded JSON arrays.
+`sejongtf/laravel-naver-commerce` is a Laravel 13 package wrapping the Naver Commerce API (`https://api.commerce.naver.com/external`). PHP 8.4+, Pest 5, Orchestra Testbench 11. Entry point is `Sejongtf\LaravelNaverCommerce\NaverCommerce` (facade `NaverCommerce`), which hands out resource classes (`orders()`, `products()`, …) that return decoded JSON arrays.
 
 ## Commands
 

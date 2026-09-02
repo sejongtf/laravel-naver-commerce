@@ -11,7 +11,7 @@ composer install
 composer test
 ```
 
-Requirements: PHP 8.3+, Composer 2. The package targets Laravel 13 (`illuminate/*` ^13) and is tested with Pest 5 on Orchestra Testbench 11.
+Requirements: PHP 8.4+ (required by Pest 5 / PHPUnit 13), Composer 2. The package targets Laravel 13 (`illuminate/*` ^13) and is tested with Pest 5 on Orchestra Testbench 11.
 
 ## Project layout
 
@@ -61,7 +61,7 @@ These are the conventions to keep when adding or changing code.
 
 ### Style
 
-- PHP 8.3 features are fine (readonly, enums, `match`, first-class callables). Declare `strict` parameter and return types.
+- PHP 8.4 features are fine (readonly, enums, `match`, first-class callables). Declare `strict` parameter and return types.
 - Keep comments and docblocks in English in new code. Existing Korean API terms (e.g. 발주 확인) may be kept in docblocks where they map to the official Korean endpoint names.
 - No new runtime dependencies without discussion.
 

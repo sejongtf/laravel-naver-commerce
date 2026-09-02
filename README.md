@@ -15,7 +15,7 @@ It wraps all 116 endpoints across every domain (auth, orders, products, settleme
 
 ## Requirements
 
-- PHP 8.3+
+- PHP 8.4+
 - Laravel 13
 
 ## Installation
