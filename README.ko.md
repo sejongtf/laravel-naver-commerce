@@ -173,7 +173,8 @@ php artisan naver-commerce:categories:export storage/app/naver-categories.json -
 ## 테스트
 
 ```bash
-composer test
+composer test      # Pest
+composer check     # Pint + PHPStan + Pest (CI와 동일)
 ```
 
 Unit/Feature 테스트는 `Http::fake()`로 동작하며 실제 API를 호출하지 않습니다.

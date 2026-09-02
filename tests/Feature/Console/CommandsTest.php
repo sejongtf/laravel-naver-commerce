@@ -7,7 +7,6 @@ use Sejongtf\LaravelNaverCommerce\Auth\TokenManager;
 use Sejongtf\LaravelNaverCommerce\Tests\TestCase;
 
 /** @var TestCase $this */
-
 function assertSellerTokenRequested(string $accountId): void
 {
     Http::assertSent(fn (Request $request) => str_ends_with($request->url(), TokenManager::TOKEN_PATH)

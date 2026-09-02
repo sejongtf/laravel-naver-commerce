@@ -116,7 +116,7 @@ class Products extends Resource
     /**
      * POST /v1/product-images/upload — 상품 이미지 다건 등록 (multipart, 최대 10개)
      *
-     * @param  array<int, string|array{contents: mixed, filename?: string}>  $files  파일 경로 문자열 또는 ['contents' => resource|string, 'filename' => string]
+     * @param  array<int, string|array<string, mixed>>  $files  파일 경로 문자열 또는 ['contents' => resource|string, 'filename' => string]
      * @return array{images: array<int, array{url: string}>}
      */
     public function uploadImages(array $files): array
@@ -138,7 +138,7 @@ class Products extends Resource
                 continue;
             }
 
-            if (! is_array($file) || ! array_key_exists('contents', $file)) {
+            if (! array_key_exists('contents', $file)) {
                 throw new InvalidArgumentException('이미지 항목은 파일 경로 또는 [contents, filename] 배열이어야 합니다.');
             }
 

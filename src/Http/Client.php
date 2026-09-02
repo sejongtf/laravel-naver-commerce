@@ -13,6 +13,8 @@ use Sejongtf\LaravelNaverCommerce\Exceptions\NaverCommerceException;
 
 /**
  * 인증·재시도·오류 변환을 담당하는 저수준 HTTP 클라이언트.
+ *
+ * @phpstan-consistent-constructor
  */
 class Client
 {

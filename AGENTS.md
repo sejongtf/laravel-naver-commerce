@@ -13,9 +13,12 @@ composer install
 vendor/bin/pest                          # unit + feature (fully faked, no network)
 vendor/bin/pest --testsuite=Integration  # live read-only API calls; skipped without .env credentials
 vendor/bin/pest --filter="<test name>"
+composer lint                            # Pint (laravel preset), check only; `composer format` fixes
+composer analyse                         # Larastan level 6
+composer check                           # lint + analyse + test (same as CI)
 ```
 
-Run `vendor/bin/pest` before reporting any code change as done. If you touched `Client`, `TokenManager`, or `QueryString` and `.env` credentials exist, also run the Integration suite.
+Run `composer check` before reporting any code change as done. If you touched `Client`, `TokenManager`, or `QueryString` and `.env` credentials exist, also run the Integration suite.
 
 ## Source of truth for the API
 
@@ -37,6 +40,7 @@ Do not invent parameter names. If a spec page is unavailable, say so rather than
 8. **Docs in English by default.** `README.md` (EN) and `README.ko.md` (KO) must be updated together. Code comments in new code are English.
 9. **Commits**: Conventional Commits (`feat:`, `fix:`, `docs:`, …). Do not add `Co-Authored-By` trailers. Do not commit unless asked.
 10. Do not add runtime dependencies or change the token cache key format without explicit approval.
+11. **Pint and PHPStan must pass.** Fix PHPStan findings at the source; do not add `@phpstan-ignore` comments or baseline entries. The only ignored identifier is `missingType.iterableValue` (plain `array` return types are intentional).
 
 ## Where things are
 
@@ -51,6 +55,7 @@ Do not invent parameter names. If a spec page is unavailable, say so rather than
 | Endpoint methods | `src/Resources/*.php` |
 | Artisan commands (`naver-commerce:token`, `:token:forget`, `:ping`, `:request`, `:orders:changed`, `:categories:export`) | `src/Console/` |
 | Config defaults | `config/naver-commerce.php` |
+| Pint / PHPStan config | `pint.json`, `phpstan.neon.dist` |
 | Test bootstrap, `fakeApi()`, `assertApiSent()` | `tests/TestCase.php` |
 | Command tests (assert on `Artisan::output()`) | `tests/Feature/Console/` |
 | Live tests (skip without `.env`) | `tests/Integration/` |

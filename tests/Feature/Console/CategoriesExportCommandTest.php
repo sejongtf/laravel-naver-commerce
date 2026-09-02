@@ -5,7 +5,6 @@ use Illuminate\Support\Facades\Http;
 use Sejongtf\LaravelNaverCommerce\Tests\TestCase;
 
 /** @var TestCase $this */
-
 const CATEGORIES = [
     ['id' => '50000000', 'name' => '패션의류', 'last' => false],
     ['id' => '50000803', 'name' => '남성의류', 'last' => true],

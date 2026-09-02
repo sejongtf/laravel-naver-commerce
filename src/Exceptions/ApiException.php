@@ -2,6 +2,4 @@
 
 namespace Sejongtf\LaravelNaverCommerce\Exceptions;
 
-class ApiException extends NaverCommerceException
-{
-}
+class ApiException extends NaverCommerceException {}

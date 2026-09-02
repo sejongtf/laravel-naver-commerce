@@ -18,6 +18,9 @@ use Sejongtf\LaravelNaverCommerce\Resources\Seller;
 use Sejongtf\LaravelNaverCommerce\Resources\SellerNotices;
 use Sejongtf\LaravelNaverCommerce\Resources\Settlements;
 
+/**
+ * @phpstan-consistent-constructor
+ */
 class NaverCommerce
 {
     public function __construct(protected Client $client) {}

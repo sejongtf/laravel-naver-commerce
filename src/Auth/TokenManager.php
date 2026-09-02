@@ -7,7 +7,6 @@ use Illuminate\Contracts\Cache\Repository;
 use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Http\Client\Factory as HttpFactory;
 use Sejongtf\LaravelNaverCommerce\Exceptions\AuthenticationException;
-use Sejongtf\LaravelNaverCommerce\Exceptions\NaverCommerceException;
 
 /**
  * OAuth2 Client Credentials 토큰 발급 및 캐시.
@@ -48,7 +47,7 @@ class TokenManager
 
         $issued = $this->issue($type, $accountId);
 
-        $ttl = max(1, (int) ($issued['expires_in'] ?? 0) - $this->ttlMargin());
+        $ttl = max(1, $issued['expires_in'] - $this->ttlMargin());
         $this->store()->put($key, $issued['access_token'], $ttl);
 
         return $this->memory[$key] = $issued['access_token'];

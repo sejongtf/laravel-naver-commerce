@@ -6,7 +6,6 @@ use Illuminate\Support\Facades\Http;
 use Sejongtf\LaravelNaverCommerce\Tests\TestCase;
 
 /** @var TestCase $this */
-
 const CHANGED_URL = TestCase::BASE.'/v1/pay-order/seller/product-orders/last-changed-statuses';
 
 function changedItem(string $id, string $status = 'PAYED'): array

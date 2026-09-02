@@ -4,7 +4,6 @@ use Sejongtf\LaravelNaverCommerce\Facades\NaverCommerce;
 use Sejongtf\LaravelNaverCommerce\Tests\Integration\IntegrationTestCase;
 
 /** @var IntegrationTestCase $this */
-
 it('issues a real access token and caches it', function () {
     $first = NaverCommerce::token();
     $second = NaverCommerce::token();

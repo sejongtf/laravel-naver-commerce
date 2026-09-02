@@ -65,10 +65,12 @@ These are the conventions to keep when adding or changing code.
 - PHP 8.4 features are fine (readonly, enums, `match`, first-class callables). Declare `strict` parameter and return types.
 - Keep comments and docblocks in English in new code. Existing Korean API terms (e.g. 발주 확인) may be kept in docblocks where they map to the official Korean endpoint names.
 - No new runtime dependencies without discussion.
+- Code style is enforced by [Laravel Pint](https://laravel.com/docs/pint) (`laravel` preset): run `composer format` before committing, `composer lint` to check.
+- Static analysis runs with [Larastan](https://github.com/larastan/larastan) at level 6 (`composer analyse`). Plain `array` types without value types are allowed on purpose (resources return decoded JSON); other findings should be fixed at the source rather than ignored.
 
 ## Tests
 
-- Run everything: `composer test` (or `vendor/bin/pest`).
+- Run everything: `composer test` (or `vendor/bin/pest`). `composer check` runs Pint, PHPStan, and the tests together, which is what CI does.
 - Feature tests use `Http::preventStrayRequests()`; any unfaked request fails the test.
 - Every new resource method needs a row in the dataset in `tests/Feature/Resources/ResourcesTest.php` (`[closure, method, path+query, expected JSON body|null]`).
 - Behavior changes in `Client`, `TokenManager`, or `QueryString` need a dedicated test in `tests/Feature` or `tests/Unit`.

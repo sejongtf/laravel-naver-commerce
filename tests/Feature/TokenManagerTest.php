@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Contracts\Cache\Factory;
+use Illuminate\Contracts\Cache\Repository;
 use Illuminate\Http\Client\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
@@ -8,7 +10,6 @@ use Sejongtf\LaravelNaverCommerce\Exceptions\AuthenticationException;
 use Sejongtf\LaravelNaverCommerce\Tests\TestCase;
 
 /** @var TestCase $this */
-
 it('issues a token with a signed form payload', function () {
     Http::fake($this->fakeToken('abc', 10800));
 
@@ -48,14 +49,14 @@ it('caches the token and reuses it', function () {
 it('applies the ttl margin when caching', function () {
     Http::fake($this->fakeToken('short', 120));
 
-    $repository = Mockery::mock(\Illuminate\Contracts\Cache\Repository::class);
+    $repository = Mockery::mock(Repository::class);
     $repository->shouldReceive('get')->once()->andReturnNull();
     $repository->shouldReceive('put')->once()->withArgs(fn ($key, $value, $ttl) => $value === 'short' && $ttl === 60)->andReturnTrue();
 
-    $factory = Mockery::mock(\Illuminate\Contracts\Cache\Factory::class);
+    $factory = Mockery::mock(Factory::class);
     $factory->shouldReceive('store')->with(null)->andReturn($repository);
 
-    $manager = new TokenManager(app(\Illuminate\Http\Client\Factory::class), $factory, config('naver-commerce'));
+    $manager = new TokenManager(app(Illuminate\Http\Client\Factory::class), $factory, config('naver-commerce'));
 
     expect($manager->token())->toBe('short');
 });

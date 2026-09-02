@@ -1,5 +1,6 @@
 <?php
 
+use Carbon\Carbon;
 use Sejongtf\LaravelNaverCommerce\Support\DateFormatter;
 
 it('formats date-time as KST ISO 8601 with milliseconds', function () {
@@ -19,5 +20,5 @@ it('accepts mutable DateTime and Carbon instances', function () {
     $mutable = new DateTime('2023-07-25 10:10:10.100', new DateTimeZone('Asia/Seoul'));
 
     expect(DateFormatter::dateTime($mutable))->toBe('2023-07-25T10:10:10.100+09:00');
-    expect(DateFormatter::dateTime(\Carbon\Carbon::parse('2023-07-25T01:10:10Z')))->toBe('2023-07-25T10:10:10.000+09:00');
+    expect(DateFormatter::dateTime(Carbon::parse('2023-07-25T01:10:10Z')))->toBe('2023-07-25T10:10:10.000+09:00');
 });

@@ -1,0 +1,12 @@
+includes:
+    - vendor/larastan/larastan/extension.neon
+
+parameters:
+    level: 6
+    paths:
+        - src
+    tmpDir: .phpstan.cache
+    reportUnmatchedIgnoredErrors: true
+    ignoreErrors:
+        # Resources return decoded JSON as plain arrays by design (no DTOs).
+        - identifier: missingType.iterableValue

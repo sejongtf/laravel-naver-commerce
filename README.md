@@ -173,7 +173,8 @@ Parameter keys match the request schemas in the [official docs](https://apicente
 ## Testing
 
 ```bash
-composer test
+composer test      # Pest
+composer check     # Pint + PHPStan + Pest (what CI runs)
 ```
 
 Unit/Feature tests run against `Http::fake()` and never hit the real API.

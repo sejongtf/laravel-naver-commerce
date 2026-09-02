@@ -1,9 +1,11 @@
 <?php
 
+use Illuminate\Support\Facades\Artisan;
+use Sejongtf\LaravelNaverCommerce\Tests\Integration\IntegrationTestCase;
 use Sejongtf\LaravelNaverCommerce\Tests\TestCase;
 
 uses(TestCase::class)->in('Feature');
-uses(\Sejongtf\LaravelNaverCommerce\Tests\Integration\IntegrationTestCase::class)->in('Integration');
+uses(IntegrationTestCase::class)->in('Integration');
 
 /**
  * Run an artisan command and return [exit code, output].
@@ -13,7 +15,7 @@ uses(\Sejongtf\LaravelNaverCommerce\Tests\Integration\IntegrationTestCase::class
  */
 function runArtisan(string $command, array $parameters = []): array
 {
-    $code = \Illuminate\Support\Facades\Artisan::call($command, $parameters);
+    $code = Artisan::call($command, $parameters);
 
-    return [$code, \Illuminate\Support\Facades\Artisan::output()];
+    return [$code, Artisan::output()];
 }

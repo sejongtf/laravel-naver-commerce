@@ -19,7 +19,7 @@ class Signature
 
         $hashed = @crypt($clientId.'_'.$timestampMs, $clientSecret);
 
-        if (! is_string($hashed) || ! str_starts_with($hashed, '$2')) {
+        if (! str_starts_with($hashed, '$2')) {
             throw new AuthenticationException('전자서명 생성에 실패했습니다. client_secret 이 bcrypt salt 형식($2a$10$...)인지 확인하세요.');
         }
 

@@ -9,7 +9,6 @@ use Sejongtf\LaravelNaverCommerce\Facades\NaverCommerce;
 use Sejongtf\LaravelNaverCommerce\Tests\TestCase;
 
 /** @var TestCase $this */
-
 it('sends bearer token and json accept header', function () {
     $this->fakeApi([$this->url('/v1/seller/account') => Http::response(['data' => ['id' => 1]])]);
 

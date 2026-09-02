@@ -5,7 +5,6 @@ use Illuminate\Support\Facades\Http;
 use Sejongtf\LaravelNaverCommerce\Tests\TestCase;
 
 /** @var TestCase $this */
-
 it('performs a GET with repeated query keys and prints pretty JSON', function () {
     $this->fakeApi([
         $this->url('/v1/pay-order/seller/product-orders*') => Http::response(['data' => ['count' => 2]]),
